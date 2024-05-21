@@ -4,7 +4,10 @@ import java.awt.AWTException;
 import java.awt.Robot;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import net.sourceforge.tess4j.Tesseract;
@@ -57,7 +60,22 @@ public class Application {
 			e.printStackTrace();
 		}
 
-		char[] characters = result.toCharArray();
+		char[] resultsArray = result.toCharArray();
+
+		List<Character> characters = new ArrayList<Character>();
+
+		for (Character character : resultsArray) {
+			characters.add(character);
+		}
+
+		Iterator<Character> iterator = characters.iterator();
+
+		while (iterator.hasNext()) {
+			char character = iterator.next();
+			if (character == '\n') {
+				iterator.remove();
+			}
+		}
 
 		for (int i = 0; i < 3; i++) {
 			System.out.println("Program starting in " + i + " seconds.");
@@ -69,7 +87,7 @@ public class Application {
 			}
 		}
 
-		for (int i = 0; i < characters.length; i++) {
+		for (Character character : characters) {
 			try {
 				Thread.sleep(8);
 			} catch (InterruptedException e) {
@@ -77,24 +95,24 @@ public class Application {
 				e.printStackTrace();
 			}
 
-			System.out.println(characters[i]);
+			System.out.println(character);
 
-			if (characters[i] == '?') {
+			if (character == '?') {
 				robot.keyPress(KeyEvent.VK_SHIFT);
 				// Press and release /
 				robot.keyPress(KeyEvent.VK_SLASH);
 				robot.keyRelease(KeyEvent.VK_SLASH);
 				// Release Shift
 				robot.keyRelease(KeyEvent.VK_SHIFT);
-			} else if (characters[i] == '\n') {
+			} else if (character == '\n') {
 				robot.keyPress(KeyEvent.VK_ENTER);
 				robot.keyRelease(KeyEvent.VK_ENTER);
 			} else {
-				robot.keyPress(charMap.get(characters[i]));
-				robot.keyRelease(charMap.get(characters[i]));
+				robot.keyPress(charMap.get(character));
+				robot.keyRelease(charMap.get(character));
 			}
 
-			System.out.println("character " + characters[i] + " is written.");
+			System.out.println("character " + character + " is written.");
 
 		}
 	}
