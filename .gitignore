@@ -23,3 +23,9 @@
 hs_err_pid*
 replay_pid*
 /target/
+
+# ides
+.classpath
+.project
+.settings
+.idea
