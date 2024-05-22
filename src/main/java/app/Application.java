@@ -12,18 +12,34 @@ import java.util.Map;
 
 import app.backend.KeyTyper;
 import app.backend.OpticalCharacterReader;
+import net.miginfocom.swing.MigLayout;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 import javax.swing.*;
 
 public class Application {
+    private JFrame frame;
     private KeyTyper typer;
     private OpticalCharacterReader ocr;
 
     public Application() {
         this.typer = new KeyTyper();
         this.ocr = new OpticalCharacterReader();
+        initFrame();
+        addComponentsToFrame();
+    }
+
+    private void initFrame() {
+        this.frame = new JFrame();
+        this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frame.setTitle("TypeRacer Bot");
+        this.frame.setLayout(new MigLayout());
+        this.frame.setLocationRelativeTo(null);
+    }
+
+    public void addComponentsToFrame() {
+        this.frame.setVisible(true);
     }
 
     private void countdown() {
@@ -41,6 +57,14 @@ public class Application {
     public static void main(String[] args) {
 //        File testImage = new File("test.png");
 //        assert testImage != null : "test file not found";
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                SwingUtilities.invokeLater(() -> {
+                    Application application = new Application();
+                });
+            }
+        });
     }
 
 }
