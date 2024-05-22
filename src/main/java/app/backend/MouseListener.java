@@ -5,24 +5,44 @@ import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseInputListener;
 
+import java.awt.*;
+
 public class MouseListener implements NativeMouseInputListener, Runnable {
     private boolean isDragged = false;
+    private Point location1;
+    private Point location2;
+
+    public MouseListener() {
+        this.location1 = new Point();
+        this.location2 = new Point();
+    }
 
     @Override
     public void nativeMouseDragged(NativeMouseEvent nativeMouseEvent) {
         isDragged = true;
-        System.out.println(isDragged);
     }
 
     @Override
     public void nativeMousePressed(NativeMouseEvent nativeMouseEvent) {
-
+        this.location1.setLocation(nativeMouseEvent.getX(), nativeMouseEvent.getY());
+        System.out.println("Location 1\n" + "X: " + nativeMouseEvent.getX() + "\nY: " + nativeMouseEvent.getY());
     }
 
     @Override
     public void nativeMouseReleased(NativeMouseEvent nativeMouseEvent) {
+        if (isDragged) {
+            this.location2.setLocation(nativeMouseEvent.getX(), nativeMouseEvent.getY());
+            System.out.println("Location 2\n" + "X: " + nativeMouseEvent.getX() + "\nY: " + nativeMouseEvent.getY());
+        }
         isDragged = false;
-        System.out.println(isDragged);
+    }
+
+    public Point getLocation1() {
+        return location1;
+    }
+
+    public Point getLocation2() {
+        return location2;
     }
 
     @Override
