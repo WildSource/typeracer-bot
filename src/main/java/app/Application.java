@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 import app.backend.KeyTyper;
+import app.backend.MouseListener;
 import app.backend.OpticalCharacterReader;
 import app.frontend.panels.BotConfigPanel;
 import app.frontend.panels.LoggerPanel;
@@ -70,8 +71,15 @@ public class Application {
                 SwingUtilities.invokeLater(() -> {
                     Application application = new Application();
                 });
+
+                SwingUtilities.invokeLater(() -> {
+                    Thread mouselistenerThread = new Thread(new MouseListener());
+                    mouselistenerThread.start();
+                });
             }
         });
+
+
     }
 
 }
