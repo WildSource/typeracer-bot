@@ -12,6 +12,10 @@ import java.util.Map;
 
 import app.backend.KeyTyper;
 import app.backend.OpticalCharacterReader;
+import app.frontend.panels.BotConfigPanel;
+import app.frontend.panels.LoggerPanel;
+import app.frontend.panels.PreviewImagePanel;
+import app.frontend.panels.PreviewTextPanel;
 import net.miginfocom.swing.MigLayout;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
@@ -39,6 +43,10 @@ public class Application {
     }
 
     public void addComponentsToFrame() {
+        this.frame.add(new BotConfigPanel().getjPanel());
+        this.frame.add(new PreviewImagePanel().getjPanel());
+        this.frame.add(new LoggerPanel().getjPanel());
+        this.frame.add(new PreviewTextPanel().getjPanel());
         this.frame.setVisible(true);
     }
 
@@ -48,7 +56,6 @@ public class Application {
             try {
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
