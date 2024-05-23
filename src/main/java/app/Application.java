@@ -62,20 +62,20 @@ public class Application {
         }
     }
 
+    public KeyTyper getTyper() {
+        return typer;
+    }
+
     public static void main(String[] args) {
 //        File testImage = new File("test.png");
 //        assert testImage != null : "test file not found";
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                SwingUtilities.invokeLater(() -> {
-                    Application application = new Application();
-                });
+                Application application = new Application();
 
-                SwingUtilities.invokeLater(() -> {
-                    Thread mouselistenerThread = new Thread(new MouseListener());
-                    mouselistenerThread.start();
-                });
+                Thread mouselistenerThread = new Thread(new MouseListener(application.getTyper()));
+                mouselistenerThread.start();
             }
         });
 

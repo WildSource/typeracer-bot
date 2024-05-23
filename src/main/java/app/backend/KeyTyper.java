@@ -1,7 +1,11 @@
 package app.backend;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -40,6 +44,27 @@ public class KeyTyper {
             this.robot = new Robot();
         } catch (AWTException e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    private Rectangle createRectangle(Point point1, Point point2) {
+        // Calculate the x, y, width, and height of the rectangle
+        int x = Math.min(point1.x, point2.x);
+        int y = Math.min(point1.y, point2.y);
+        int width = Math.abs(point1.x - point2.x);
+        int height = Math.abs(point1.y - point2.y);
+
+        // Create and return the rectangle
+        return new Rectangle(x, y, width, height);
+    }
+
+    public void screenshot(Point point1, Point point2) {
+        BufferedImage image = robot.createScreenCapture(createRectangle(point1, point2));
+        try {
+            ImageIO.write(image, "png", new File("screenshot.png"));
+            System.out.println("Screenshoted");
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }

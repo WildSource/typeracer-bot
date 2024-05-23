@@ -8,11 +8,13 @@ import com.github.kwhat.jnativehook.mouse.NativeMouseInputListener;
 import java.awt.*;
 
 public class MouseListener implements NativeMouseInputListener, Runnable {
+    private KeyTyper typer;
     private boolean isDragged = false;
     private Point location1;
     private Point location2;
 
-    public MouseListener() {
+    public MouseListener(KeyTyper typer) {
+        this.typer = typer;
         this.location1 = new Point();
         this.location2 = new Point();
     }
@@ -33,6 +35,7 @@ public class MouseListener implements NativeMouseInputListener, Runnable {
         if (isDragged) {
             this.location2.setLocation(nativeMouseEvent.getX(), nativeMouseEvent.getY());
             System.out.println("Location 2\n" + "X: " + nativeMouseEvent.getX() + "\nY: " + nativeMouseEvent.getY());
+            typer.screenshot(location1, location2);
         }
         isDragged = false;
     }
@@ -56,10 +59,8 @@ public class MouseListener implements NativeMouseInputListener, Runnable {
             System.exit(1);
         }
 
-        MouseListener mouseListener = new MouseListener();
-
         // Add the appropriate listeners.
-        GlobalScreen.addNativeMouseListener(mouseListener);
-        GlobalScreen.addNativeMouseMotionListener(mouseListener);
+        GlobalScreen.addNativeMouseListener(this);
+        GlobalScreen.addNativeMouseMotionListener(this);
     }
 }
