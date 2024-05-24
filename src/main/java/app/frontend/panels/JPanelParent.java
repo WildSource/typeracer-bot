@@ -1,6 +1,7 @@
 package app.frontend.panels;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class JPanelParent {
     private JPanel jPanel;
@@ -9,11 +10,13 @@ public class JPanelParent {
         this.jPanel = new JPanel();
     }
 
-    public JPanel getjPanel() {
-        return jPanel;
+    public void addComponents(Component... components) {
+        for (Component component : components) {
+            this.jPanel.add(component);
+        }
     }
 
-    public void setjPanel(JPanel jPanel) {
-        this.jPanel = jPanel;
+    public JPanel getjPanel() {
+        return jPanel;
     }
 }
