@@ -1,15 +1,5 @@
 package app;
 
-import java.awt.AWTException;
-import java.awt.Robot;
-import java.awt.event.KeyEvent;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import app.backend.KeyTyper;
 import app.backend.MouseListener;
 import app.backend.OpticalCharacterReader;
@@ -18,21 +8,23 @@ import app.frontend.panels.LoggerPanel;
 import app.frontend.panels.PreviewImagePanel;
 import app.frontend.panels.PreviewTextPanel;
 import net.miginfocom.swing.MigLayout;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
 
 import javax.swing.*;
 
 public class Application {
     private JFrame frame;
+    private BotConfigPanel botConfigPanel;
+    private PreviewImagePanel previewImagePanel;
+    private LoggerPanel loggerPanel;
+    private PreviewTextPanel previewTextPanel;
     private KeyTyper typer;
     private OpticalCharacterReader ocr;
 
     public Application() {
-        this.typer = new KeyTyper();
-        this.ocr = new OpticalCharacterReader();
         initFrame();
         addComponentsToFrame();
+        this.typer = new KeyTyper(this);
+        this.ocr = new OpticalCharacterReader(this);
     }
 
     private void initFrame() {
@@ -44,10 +36,17 @@ public class Application {
     }
 
     public void addComponentsToFrame() {
-        this.frame.add(new BotConfigPanel().getjPanel());
-        this.frame.add(new PreviewImagePanel().getjPanel());
-        this.frame.add(new LoggerPanel().getjPanel());
-        this.frame.add(new PreviewTextPanel().getjPanel());
+        this.botConfigPanel = new BotConfigPanel();
+        this.frame.add(this.botConfigPanel.getjPanel());
+
+        this.previewImagePanel = new PreviewImagePanel();
+        this.frame.add(this.previewImagePanel.getjPanel());
+
+        this.loggerPanel = new LoggerPanel();
+        this.frame.add(this.loggerPanel.getjPanel());
+
+        this.previewTextPanel = new PreviewTextPanel();
+        this.frame.add(this.previewTextPanel.getjPanel());
         this.frame.setVisible(true);
     }
 
@@ -66,6 +65,30 @@ public class Application {
         return typer;
     }
 
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public BotConfigPanel getBotConfigPanel() {
+        return botConfigPanel;
+    }
+
+    public PreviewImagePanel getPreviewImagePanel() {
+        return previewImagePanel;
+    }
+
+    public LoggerPanel getLoggerPanel() {
+        return loggerPanel;
+    }
+
+    public PreviewTextPanel getPreviewTextPanel() {
+        return previewTextPanel;
+    }
+
+    public OpticalCharacterReader getOcr() {
+        return ocr;
+    }
+
     public static void main(String[] args) {
 //        File testImage = new File("test.png");
 //        assert testImage != null : "test file not found";
@@ -74,12 +97,17 @@ public class Application {
             public void run() {
                 Application application = new Application();
 
-                Thread mouselistenerThread = new Thread(new MouseListener(application.getTyper()));
-                mouselistenerThread.start();
+                SwingWorker mouseListener = new SwingWorker() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        Thread mouselistenerThread = new Thread(new MouseListener(application));
+                        mouselistenerThread.start();
+                        return null;
+                    }
+                };
+
+                mouseListener.run();
             }
         });
-
-
     }
-
 }

@@ -1,5 +1,7 @@
 package app.backend;
 
+import app.Application;
+
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -13,10 +15,12 @@ import java.util.Map;
 import java.util.List;
 
 public class KeyTyper {
+    private Application application;
     private Map<Character, Integer> charMap;
     private Robot robot;
 
-    public KeyTyper() {
+    public KeyTyper(Application application) {
+        this.application = application;
         keyMapSetup();
         robotSetup();
     }
@@ -59,14 +63,9 @@ public class KeyTyper {
         return new Rectangle(x, y, width, height);
     }
 
-    public void screenshot(Point point1, Point point2) {
-        BufferedImage image = robot.createScreenCapture(createRectangle(point1, point2));
-        try {
-            ImageIO.write(image, "png", new File("screenshot.png"));
-            System.out.println("Screenshoted");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public BufferedImage screenshot(Point point1, Point point2) {
+        System.out.println("Screenshoted");
+        return robot.createScreenCapture(createRectangle(point1, point2));
     }
 
     public void typeKey(List<Character> characters) {

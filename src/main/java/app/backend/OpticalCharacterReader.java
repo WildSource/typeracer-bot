@@ -1,14 +1,17 @@
 package app.backend;
 
+import app.Application;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
 import java.io.File;
 
 public class OpticalCharacterReader {
+    private Application application;
     private Tesseract tesseract;
 
-    public OpticalCharacterReader() {
+    public OpticalCharacterReader(Application application) {
+        this.application = application;
         Tesseract tesseract = new Tesseract();
         tesseract.setDatapath("tessdata");
         tesseract.setLanguage("eng");

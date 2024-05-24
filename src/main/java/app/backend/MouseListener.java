@@ -1,20 +1,22 @@
 package app.backend;
 
+import app.Application;
 import com.github.kwhat.jnativehook.GlobalScreen;
 import com.github.kwhat.jnativehook.NativeHookException;
 import com.github.kwhat.jnativehook.mouse.NativeMouseEvent;
 import com.github.kwhat.jnativehook.mouse.NativeMouseInputListener;
 
+import javax.swing.*;
 import java.awt.*;
 
 public class MouseListener implements NativeMouseInputListener, Runnable {
-    private KeyTyper typer;
+    Application application;
     private boolean isDragged = false;
     private Point location1;
     private Point location2;
 
-    public MouseListener(KeyTyper typer) {
-        this.typer = typer;
+    public MouseListener(Application application) {
+        this.application = application;
         this.location1 = new Point();
         this.location2 = new Point();
     }
@@ -35,7 +37,9 @@ public class MouseListener implements NativeMouseInputListener, Runnable {
         if (isDragged) {
             this.location2.setLocation(nativeMouseEvent.getX(), nativeMouseEvent.getY());
             System.out.println("Location 2\n" + "X: " + nativeMouseEvent.getX() + "\nY: " + nativeMouseEvent.getY());
-            typer.screenshot(location1, location2);
+            SwingUtilities.invokeLater(() -> {
+                application.getPreviewImagePanel().updatePreviewUI(application.getTyper().screenshot(location1, location2));
+            });
         }
         isDragged = false;
     }

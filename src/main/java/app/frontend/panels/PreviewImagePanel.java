@@ -1,4 +1,37 @@
 package app.frontend.panels;
 
-public class PreviewImagePanel extends JPanelParent{
+import app.backend.KeyTyper;
+import net.miginfocom.swing.MigLayout;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+public class PreviewImagePanel extends JPanelParent {
+    JLabel previewLabel;
+    JLabel actualPreview;
+
+    public PreviewImagePanel() {
+        getjPanel().setLayout(new MigLayout());
+
+        this.previewLabel = new JLabel("Screenshot Preview");
+        this.actualPreview = new JLabel();
+
+        getjPanel().add(this.previewLabel);
+        getjPanel().add(this.actualPreview);
+
+        this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
+    }
+
+    public void updatePreviewUI(BufferedImage screenshot) {
+        SwingUtilities.invokeLater(() -> {
+            ImageIcon image = new ImageIcon(screenshot);
+            setIcon(image);
+        });
+    }
+
+    public void setIcon(Icon screenshot) {
+        this.actualPreview.setIcon(screenshot);
+    }
 }
