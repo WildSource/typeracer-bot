@@ -33,7 +33,7 @@ public class PreviewImagePanel extends JPanelParent {
         });
         this.application.getTyper().setResult(this.application.getOcr().readScreenShot(screenshot));
         SwingUtilities.invokeLater(() -> {
-            this.application.getFrame().setSize(this.application.getFrame().getWidth() + screenshot.getWidth() / 3, this.application.getFrame().getHeight() + screenshot.getHeight() / 3);
+            this.application.getFrame().setSize(this.application.getFrame().getWidth() + screenshot.getWidth(), this.application.getFrame().getHeight() + screenshot.getHeight());
             this.application.getFrame().setLocationRelativeTo(null);
         });
     }

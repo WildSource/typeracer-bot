@@ -28,7 +28,7 @@ public class Application {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setTitle("TypeRacer Bot");
-        this.frame.setPreferredSize(new Dimension(720, 380));
+        this.frame.setPreferredSize(new Dimension(220, 180));
         this.frame.setLayout(new MigLayout());
         this.frame.setLocationRelativeTo(null);
         this.frame.setAlwaysOnTop(true);
