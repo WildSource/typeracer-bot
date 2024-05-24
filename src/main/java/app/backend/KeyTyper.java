@@ -130,12 +130,9 @@ public class KeyTyper {
             characters.add(character);
         }
 
-        Iterator<Character> iterator = characters.iterator();
-
-        while (iterator.hasNext()) {
-            char character = iterator.next();
-            if (character == '\n') {
-                iterator.remove();
+        for (int i = 0; i < characters.size(); i++) {
+            if (characters.get(i) == '\n') {
+                characters.set(i, ' ');
             }
         }
 

@@ -1,7 +1,6 @@
 package app.frontend.panels;
 
 import app.Application;
-import app.backend.KeyTyper;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -33,10 +32,17 @@ public class PreviewImagePanel extends JPanelParent {
             setIcon(image);
         });
         this.application.getTyper().setResult(this.application.getOcr().readScreenShot(screenshot));
+        SwingUtilities.invokeLater(() -> {
+            // Get the screen dimensions
+            Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+            // Set the size of the frame to the screen dimensions
+            this.application.getFrame().setSize(screenSize);
+            this.application.getFrame().setLocationRelativeTo(null);
+        });
     }
 
     public void setIcon(Icon screenshot) {
         this.actualPreview.setIcon(screenshot);
-        this.application.getFrame().pack();
     }
 }
