@@ -10,6 +10,7 @@ import app.frontend.panels.PreviewTextPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class Application {
     private JFrame frame;
@@ -31,15 +32,17 @@ public class Application {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setTitle("TypeRacer Bot");
+        this.frame.setPreferredSize(new Dimension(720, 480));
         this.frame.setLayout(new MigLayout());
         this.frame.setLocationRelativeTo(null);
+        this.frame.pack();
     }
 
     public void addComponentsToFrame() {
         this.botConfigPanel = new BotConfigPanel();
         this.frame.add(this.botConfigPanel.getjPanel());
 
-        this.previewImagePanel = new PreviewImagePanel();
+        this.previewImagePanel = new PreviewImagePanel(this);
         this.frame.add(this.previewImagePanel.getjPanel());
 
         this.loggerPanel = new LoggerPanel();

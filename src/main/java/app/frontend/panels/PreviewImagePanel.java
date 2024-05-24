@@ -1,5 +1,6 @@
 package app.frontend.panels;
 
+import app.Application;
 import app.backend.KeyTyper;
 import net.miginfocom.swing.MigLayout;
 
@@ -9,10 +10,12 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PreviewImagePanel extends JPanelParent {
+    Application application;
     JLabel previewLabel;
     JLabel actualPreview;
 
-    public PreviewImagePanel() {
+    public PreviewImagePanel(Application application) {
+        this.application = application;
         getjPanel().setLayout(new MigLayout());
 
         this.previewLabel = new JLabel("Screenshot Preview");
@@ -33,5 +36,6 @@ public class PreviewImagePanel extends JPanelParent {
 
     public void setIcon(Icon screenshot) {
         this.actualPreview.setIcon(screenshot);
+        this.application.getFrame().pack();
     }
 }
