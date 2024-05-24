@@ -4,6 +4,7 @@ import app.backend.KeyTyper;
 import app.backend.MouseListener;
 import app.backend.OpticalCharacterReader;
 import app.frontend.panels.BotConfigPanel;
+import app.frontend.panels.LoggerPanel;
 import app.frontend.panels.PreviewImagePanel;
 import net.miginfocom.swing.MigLayout;
 
@@ -14,6 +15,7 @@ public class Application {
     private JFrame frame;
     private BotConfigPanel botConfigPanel;
     private PreviewImagePanel previewImagePanel;
+    private LoggerPanel loggerPanel;
     private KeyTyper typer;
     private OpticalCharacterReader ocr;
 
@@ -24,11 +26,15 @@ public class Application {
         this.ocr = new OpticalCharacterReader(this);
     }
 
+    private void changePrintStreamToLoggerPanel() {
+
+    }
+
     private void initFrame() {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.frame.setTitle("TypeRacer Bot");
-        this.frame.setPreferredSize(new Dimension(220, 180));
+        this.frame.setPreferredSize(new Dimension(220, 280));
         this.frame.setLayout(new MigLayout());
         this.frame.setLocationRelativeTo(null);
         this.frame.setAlwaysOnTop(true);
@@ -41,6 +47,9 @@ public class Application {
 
         this.previewImagePanel = new PreviewImagePanel(this);
         this.frame.add(this.previewImagePanel.getjPanel(), "wrap");
+
+        this.loggerPanel = new LoggerPanel(this);
+        this.frame.add(this.loggerPanel.getjPanel());
 
         this.frame.setVisible(true);
     }
