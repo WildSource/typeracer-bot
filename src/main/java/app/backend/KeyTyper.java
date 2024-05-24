@@ -85,7 +85,7 @@ public class KeyTyper {
         countdown();
         for (Character character : result) {
             try {
-                Thread.sleep(8);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -104,8 +104,18 @@ public class KeyTyper {
                 robot.keyPress(KeyEvent.VK_ENTER);
                 robot.keyRelease(KeyEvent.VK_ENTER);
             } else {
-                robot.keyPress(charMap.get(character));
-                robot.keyRelease(charMap.get(character));
+                if (Character.isUpperCase(character)) {
+                    robot.keyPress(KeyEvent.VK_SHIFT);
+
+                    robot.keyPress(charMap.get(character));
+                    robot.keyRelease(charMap.get(character));
+
+                    // Release the shift key
+                    robot.keyRelease(KeyEvent.VK_SHIFT);
+                } else {
+                    robot.keyPress(charMap.get(character));
+                    robot.keyRelease(charMap.get(character));
+                }
             }
             System.out.println("character " + character + " is written.");
         }
