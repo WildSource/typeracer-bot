@@ -29,10 +29,26 @@ public class BotConfigPanel extends JPanelParent {
         this.captureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                System.out.println("Starting mouselistener");
                 SwingUtilities.invokeLater(application::startMouseListener);
             }
         });
+
         this.startButton = new JButton("start");
+        this.startButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingWorker swingWorker = new SwingWorker() {
+                    @Override
+                    protected Object doInBackground() throws Exception {
+                        application.getTyper().typeKey();
+                        return null;
+                    }
+                };
+
+                swingWorker.run();
+            }
+        });
 
         this.getjPanel().add(this.typeSpeed);
         this.getjPanel().add(this.typeSpeedTextField, "wrap");

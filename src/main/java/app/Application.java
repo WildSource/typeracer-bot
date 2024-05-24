@@ -45,17 +45,6 @@ public class Application {
         this.frame.setVisible(true);
     }
 
-    private void countdown() {
-        for (int i = 1; i <= 3; i++) {
-            System.out.println("Program starting in " + i + " seconds.");
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void startMouseListener() {
         Application app = this;
         SwingWorker mouseListener = new SwingWorker() {
@@ -91,8 +80,6 @@ public class Application {
     }
 
     public static void main(String[] args) {
-//        File testImage = new File("test.png");
-//        assert testImage != null : "test file not found";
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {

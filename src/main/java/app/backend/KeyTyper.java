@@ -18,11 +18,13 @@ public class KeyTyper {
     private Application application;
     private Map<Character, Integer> charMap;
     private Robot robot;
+    private List<Character> result;
 
     public KeyTyper(Application application) {
         this.application = application;
         keyMapSetup();
         robotSetup();
+        this.result = null;
     }
 
     private void keyMapSetup() {
@@ -68,8 +70,20 @@ public class KeyTyper {
         return robot.createScreenCapture(createRectangle(point1, point2));
     }
 
-    public void typeKey(List<Character> characters) {
-        for (Character character : characters) {
+    private void countdown() {
+        for (int i = 1; i <= 3; i++) {
+            System.out.println("Program starting in " + i + " seconds.");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void typeKey() {
+        countdown();
+        for (Character character : result) {
             try {
                 Thread.sleep(8);
             } catch (InterruptedException e) {
@@ -97,7 +111,7 @@ public class KeyTyper {
         }
     }
 
-    public List<Character> convertStringtoCharArrayFormat(String result) {
+    private List<Character> convertStringtoCharArrayFormat(String result) {
         char[] resultsArray = result.toCharArray();
 
         List<Character> characters = new ArrayList<Character>();
@@ -116,6 +130,10 @@ public class KeyTyper {
         }
 
         return characters;
+    }
+
+    public void setResult(String result) {
+        this.result = convertStringtoCharArrayFormat(result);
     }
 }
 

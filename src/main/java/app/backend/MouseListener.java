@@ -40,6 +40,12 @@ public class MouseListener implements NativeMouseInputListener, Runnable {
             SwingUtilities.invokeLater(() -> {
                 application.getPreviewImagePanel().updatePreviewUI(application.getTyper().screenshot(location1, location2));
             });
+            try {
+                GlobalScreen.unregisterNativeHook();
+                System.out.println("MouseListener stopped");
+            } catch (NativeHookException e) {
+                throw new RuntimeException(e);
+            }
         }
         isDragged = false;
     }
