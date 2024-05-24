@@ -13,6 +13,7 @@ public class BotConfigPanel extends JPanelParent {
     private Application application;
     JLabel typeSpeed;
     JTextField typeSpeedTextField;
+    JButton confirmTypeSpeedButton;
     JButton captureButton;
     JButton startButton;
 
@@ -24,6 +25,14 @@ public class BotConfigPanel extends JPanelParent {
         this.typeSpeedTextField = new JTextField();
         this.typeSpeedTextField.setText("10");
         this.typeSpeedTextField.setPreferredSize(new Dimension(30, 30));
+
+        this.confirmTypeSpeedButton = new JButton("confirm");
+        this.confirmTypeSpeedButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("TypeSpeed: " + typeSpeedTextField.getText());
+            }
+        });
 
         this.captureButton = new JButton("capture");
         this.captureButton.addActionListener(new ActionListener() {
@@ -51,7 +60,8 @@ public class BotConfigPanel extends JPanelParent {
         });
 
         this.getjPanel().add(this.typeSpeed);
-        this.getjPanel().add(this.typeSpeedTextField, "wrap");
+        this.getjPanel().add(this.typeSpeedTextField);
+        this.getjPanel().add(this.confirmTypeSpeedButton, "wrap");
         this.getjPanel().add(this.startButton);
         this.getjPanel().add(this.captureButton);
 
