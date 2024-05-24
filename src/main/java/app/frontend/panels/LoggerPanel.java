@@ -12,6 +12,7 @@ import java.io.PrintStream;
 public class LoggerPanel extends JPanelParent {
     private Application application;
     private JLabel title;
+    private JScrollPane scrollPane;
     private JTextArea logger;
 
     public LoggerPanel(Application application) {
@@ -20,15 +21,17 @@ public class LoggerPanel extends JPanelParent {
 
         this.title = new JLabel("Logger");
         this.logger = new JTextArea();
+        this.scrollPane = new JScrollPane(this.logger);
 
         PrintStream printStream = new PrintStream(new TextAreaOutputStream(this.logger));
         System.setOut(printStream);
         System.setErr(printStream);
 
         getjPanel().add(this.title, "wrap");
-        getjPanel().add(this.logger);
+        getjPanel().add(this.scrollPane);
 
         this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
+        this.application.getFrame().pack();
     }
 
     private class TextAreaOutputStream extends OutputStream {
@@ -50,6 +53,7 @@ public class LoggerPanel extends JPanelParent {
                     @Override
                     public void run() {
                         textArea.append(text);
+                        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
                         // Scroll to the bottom
                         textArea.setCaretPosition(textArea.getDocument().getLength());
                     }
