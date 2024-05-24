@@ -31,6 +31,7 @@ public class PreviewImagePanel extends JPanelParent {
         SwingUtilities.invokeLater(() -> {
             ImageIcon image = new ImageIcon(screenshot);
             setIcon(image);
+
         });
     }
 

@@ -1,19 +1,23 @@
 package app.frontend.panels;
 
+import app.Application;
 import net.miginfocom.swing.MigLayout;
 
-import javax.sound.sampled.Line;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.Arrays;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class BotConfigPanel extends JPanelParent {
+    private Application application;
     JLabel typeSpeed;
     JTextField typeSpeedTextField;
+    JButton captureButton;
     JButton startButton;
 
-    public BotConfigPanel() {
+    public BotConfigPanel(Application application) {
+        this.application = application;
         getjPanel().setLayout(new MigLayout());
         this.typeSpeed = new JLabel("type speed (ms)");
 
@@ -21,11 +25,19 @@ public class BotConfigPanel extends JPanelParent {
         this.typeSpeedTextField.setText("10");
         this.typeSpeedTextField.setPreferredSize(new Dimension(30, 30));
 
+        this.captureButton = new JButton("capture");
+        this.captureButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                SwingUtilities.invokeLater(application::startMouseListener);
+            }
+        });
         this.startButton = new JButton("start");
 
         this.getjPanel().add(this.typeSpeed);
         this.getjPanel().add(this.typeSpeedTextField, "wrap");
         this.getjPanel().add(this.startButton);
+        this.getjPanel().add(this.captureButton);
 
         this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
     }

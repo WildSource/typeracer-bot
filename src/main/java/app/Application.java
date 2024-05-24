@@ -4,9 +4,7 @@ import app.backend.KeyTyper;
 import app.backend.MouseListener;
 import app.backend.OpticalCharacterReader;
 import app.frontend.panels.BotConfigPanel;
-import app.frontend.panels.LoggerPanel;
 import app.frontend.panels.PreviewImagePanel;
-import app.frontend.panels.PreviewTextPanel;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
@@ -16,8 +14,6 @@ public class Application {
     private JFrame frame;
     private BotConfigPanel botConfigPanel;
     private PreviewImagePanel previewImagePanel;
-    private LoggerPanel loggerPanel;
-    private PreviewTextPanel previewTextPanel;
     private KeyTyper typer;
     private OpticalCharacterReader ocr;
 
@@ -35,21 +31,17 @@ public class Application {
         this.frame.setPreferredSize(new Dimension(720, 480));
         this.frame.setLayout(new MigLayout());
         this.frame.setLocationRelativeTo(null);
+        this.frame.setAlwaysOnTop(true);
         this.frame.pack();
     }
 
     public void addComponentsToFrame() {
-        this.botConfigPanel = new BotConfigPanel();
-        this.frame.add(this.botConfigPanel.getjPanel());
+        this.botConfigPanel = new BotConfigPanel(this);
+        this.frame.add(this.botConfigPanel.getjPanel(), "wrap");
 
         this.previewImagePanel = new PreviewImagePanel(this);
-        this.frame.add(this.previewImagePanel.getjPanel());
+        this.frame.add(this.previewImagePanel.getjPanel(), "wrap");
 
-        this.loggerPanel = new LoggerPanel();
-        this.frame.add(this.loggerPanel.getjPanel());
-
-        this.previewTextPanel = new PreviewTextPanel();
-        this.frame.add(this.previewTextPanel.getjPanel());
         this.frame.setVisible(true);
     }
 
@@ -62,6 +54,20 @@ public class Application {
                 e.printStackTrace();
             }
         }
+    }
+
+    public void startMouseListener() {
+        Application app = this;
+        SwingWorker mouseListener = new SwingWorker() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                Thread mouselistenerThread = new Thread(new MouseListener(app));
+                mouselistenerThread.start();
+                return null;
+            }
+        };
+
+        mouseListener.run();
     }
 
     public KeyTyper getTyper() {
@@ -80,14 +86,6 @@ public class Application {
         return previewImagePanel;
     }
 
-    public LoggerPanel getLoggerPanel() {
-        return loggerPanel;
-    }
-
-    public PreviewTextPanel getPreviewTextPanel() {
-        return previewTextPanel;
-    }
-
     public OpticalCharacterReader getOcr() {
         return ocr;
     }
@@ -99,17 +97,6 @@ public class Application {
             @Override
             public void run() {
                 Application application = new Application();
-
-                SwingWorker mouseListener = new SwingWorker() {
-                    @Override
-                    protected Void doInBackground() throws Exception {
-                        Thread mouselistenerThread = new Thread(new MouseListener(application));
-                        mouselistenerThread.start();
-                        return null;
-                    }
-                };
-
-                mouseListener.run();
             }
         });
     }
