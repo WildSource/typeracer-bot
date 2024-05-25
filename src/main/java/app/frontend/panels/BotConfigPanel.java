@@ -1,6 +1,7 @@
 package app.frontend.panels;
 
 import app.Application;
+import app.backend.actionListeners.CaptureAction;
 import app.backend.actionListeners.ConfirmTypeSpeedAction;
 import app.frontend.JPanelParent;
 import net.miginfocom.swing.MigLayout;
@@ -31,13 +32,7 @@ public class BotConfigPanel extends JPanelParent {
         this.confirmTypeSpeedButton.addActionListener(new ConfirmTypeSpeedAction(getApplication()));
 
         this.captureButton = new JButton("capture");
-        this.captureButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                System.out.println("Starting mouselistener");
-                SwingUtilities.invokeLater(getApplication()::startMouseListener);
-            }
-        });
+        this.captureButton.addActionListener(new CaptureAction(getApplication()));
 
         this.startButton = new JButton("start");
         this.startButton.addActionListener(new ActionListener() {
