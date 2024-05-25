@@ -19,7 +19,7 @@ public class BotConfigPanel extends JPanelParent {
 
     public BotConfigPanel(Application application) {
         super(application);
-        getjPanel().setLayout(new MigLayout());
+
         this.typeSpeed = new JLabel("type speed (ms)");
 
         this.typeSpeedTextField = new JTextField();
@@ -73,8 +73,6 @@ public class BotConfigPanel extends JPanelParent {
         this.getjPanel().add(this.confirmTypeSpeedButton, "wrap");
         this.getjPanel().add(this.startButton);
         this.getjPanel().add(this.captureButton);
-
-        this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
     }
 
     public JTextField getTypeSpeedTextField() {

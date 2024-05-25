@@ -1,8 +1,10 @@
 package app.frontend;
 
 import app.Application;
+import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 
 public class JPanelParent {
@@ -12,6 +14,9 @@ public class JPanelParent {
     public JPanelParent(Application application) {
         this.application = application;
         this.jPanel = new JPanel();
+        this.jPanel.setLayout(new MigLayout());
+        this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
+        getApplication().getFrame().pack();
     }
 
     public void addComponents(Component... components) {

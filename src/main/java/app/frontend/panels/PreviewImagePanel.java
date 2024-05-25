@@ -15,15 +15,12 @@ public class PreviewImagePanel extends JPanelParent {
 
     public PreviewImagePanel(Application application) {
         super(application);
-        getjPanel().setLayout(new MigLayout());
 
         this.previewLabel = new JLabel("Screenshot Preview");
         this.actualPreview = new JLabel();
 
         getjPanel().add(this.previewLabel);
         getjPanel().add(this.actualPreview);
-
-        this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
     }
 
     public void updatePreviewUI(BufferedImage screenshot) {

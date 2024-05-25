@@ -17,7 +17,6 @@ public class LoggerPanel extends JPanelParent {
 
     public LoggerPanel(Application application) {
         super(application);
-        getjPanel().setLayout(new MigLayout());
 
         this.title = new JLabel("Logger");
         this.logger = new JTextArea();
@@ -29,9 +28,6 @@ public class LoggerPanel extends JPanelParent {
 
         getjPanel().add(this.title, "wrap");
         getjPanel().add(this.scrollPane);
-
-        this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
-        getApplication().getFrame().pack();
     }
 
     private class TextAreaOutputStream extends OutputStream {
