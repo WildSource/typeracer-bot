@@ -3,6 +3,7 @@ package app.frontend.panels;
 import app.Application;
 import app.backend.actionListeners.CaptureAction;
 import app.backend.actionListeners.ConfirmTypeSpeedAction;
+import app.backend.actionListeners.StartAction;
 import app.frontend.JPanelParent;
 import net.miginfocom.swing.MigLayout;
 
@@ -35,20 +36,7 @@ public class BotConfigPanel extends JPanelParent {
         this.captureButton.addActionListener(new CaptureAction(getApplication()));
 
         this.startButton = new JButton("start");
-        this.startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SwingWorker swingWorker = new SwingWorker() {
-                    @Override
-                    protected Object doInBackground() throws Exception {
-                        getApplication().getTyper().typeKey();
-                        return null;
-                    }
-                };
-
-                swingWorker.run();
-            }
-        });
+        this.startButton.addActionListener(new StartAction(getApplication()));
 
         this.getjPanel().add(this.typeSpeed);
         this.getjPanel().add(this.typeSpeedTextField);
