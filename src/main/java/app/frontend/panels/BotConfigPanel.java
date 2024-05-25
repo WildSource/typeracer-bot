@@ -1,6 +1,7 @@
 package app.frontend.panels;
 
 import app.Application;
+import app.backend.actionListeners.ConfirmTypeSpeedAction;
 import app.frontend.JPanelParent;
 import net.miginfocom.swing.MigLayout;
 
@@ -27,21 +28,7 @@ public class BotConfigPanel extends JPanelParent {
         this.typeSpeedTextField.setPreferredSize(new Dimension(30, 30));
 
         this.confirmTypeSpeedButton = new JButton("confirm");
-        this.confirmTypeSpeedButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                SwingWorker swingWorker = new SwingWorker() {
-                    @Override
-                    protected Object doInBackground() throws Exception {
-                        int typespeed = Integer.parseInt(typeSpeedTextField.getText());
-                        getApplication().getTyper().setTypeSpeed(typespeed);
-                        System.out.println("TypeSpeed: " + typespeed);
-                        return null;
-                    }
-                };
-                swingWorker.run();
-            }
-        });
+        this.confirmTypeSpeedButton.addActionListener(new ConfirmTypeSpeedAction(getApplication()));
 
         this.captureButton = new JButton("capture");
         this.captureButton.addActionListener(new ActionListener() {
