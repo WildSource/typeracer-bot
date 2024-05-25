@@ -87,16 +87,10 @@ public class KeyTyper extends ApplicationParent {
         countdown();
         for (Character character : result) {
             sleep();
-
             System.out.println(character);
 
             if (character == '?') {
-                robot.keyPress(KeyEvent.VK_SHIFT);
-                // Press and release /
-                robot.keyPress(KeyEvent.VK_SLASH);
-                robot.keyRelease(KeyEvent.VK_SLASH);
-                // Release Shift
-                robot.keyRelease(KeyEvent.VK_SHIFT);
+                shiftModifierKey(KeyEvent.VK_SLASH);
             } else if (character == '\n') {
                 robot.keyPress(KeyEvent.VK_ENTER);
                 robot.keyRelease(KeyEvent.VK_ENTER);
@@ -116,6 +110,15 @@ public class KeyTyper extends ApplicationParent {
             }
             System.out.println("character " + character + " is written.");
         }
+    }
+
+    private void shiftModifierKey(int keyEvent) {
+        robot.keyPress(KeyEvent.VK_SHIFT);
+        // Press and release /
+        robot.keyPress(keyEvent);
+        robot.keyRelease(keyEvent);
+        // Release Shift
+        robot.keyRelease(KeyEvent.VK_SHIFT);
     }
 
     private void sleep() {
