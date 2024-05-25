@@ -27,9 +27,25 @@ public class PreviewImagePanel extends JPanelParent {
         SwingUtilities.invokeLater(() -> {
             this.actualPreview.setIcon(new ImageIcon(screenshot));
         });
+        notifyTyper(screenshot);
+        updateFrameSize(screenshot.getWidth(), screenshot.getHeight());
+    }
+
+    private void notifyTyper(BufferedImage screenshot) {
         getApplication().getTyper().setResult(getApplication().getOcr().readScreenShot(screenshot));
+    }
+
+    private void updateFrameSize(int width, int height) {
+        int frameWidth = getApplication()
+                .getFrame()
+                .getWidth() + width;
+
+        int frameHeight = getApplication()
+                .getFrame()
+                .getHeight() + height;
+
         SwingUtilities.invokeLater(() -> {
-            getApplication().getFrame().setSize(getApplication().getFrame().getWidth() + screenshot.getWidth(), getApplication().getFrame().getHeight() + screenshot.getHeight());
+            getApplication().getFrame().setSize(frameWidth, frameHeight);
             getApplication().getFrame().setLocationRelativeTo(null);
         });
     }
