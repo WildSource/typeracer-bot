@@ -1,4 +1,4 @@
-package app.frontend.panels;
+package app.frontend;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,6 +1,7 @@
 package app.frontend.panels;
 
 import app.Application;
+import app.frontend.JPanelParent;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
