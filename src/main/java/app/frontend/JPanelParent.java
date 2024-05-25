@@ -15,6 +15,7 @@ public class JPanelParent {
         this.application = application;
         this.jPanel = new JPanel();
         this.jPanel.setLayout(new MigLayout());
+
         this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
         getApplication().getFrame().pack();
     }
