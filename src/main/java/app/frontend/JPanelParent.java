@@ -1,18 +1,18 @@
 package app.frontend;
 
 import app.Application;
+import app.backend.ApplicationParent;
 import net.miginfocom.swing.MigLayout;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 
-public class JPanelParent {
-    private Application application;
+public class JPanelParent extends ApplicationParent {
     private JPanel jPanel;
 
     public JPanelParent(Application application) {
-        this.application = application;
+        super(application);
         this.jPanel = new JPanel();
         this.jPanel.setLayout(new MigLayout());
 
@@ -28,9 +28,5 @@ public class JPanelParent {
 
     public JPanel getjPanel() {
         return jPanel;
-    }
-
-    public Application getApplication() {
-        return application;
     }
 }
