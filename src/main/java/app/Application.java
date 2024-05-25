@@ -26,10 +26,6 @@ public class Application {
         this.ocr = new OpticalCharacterReader(this);
     }
 
-    private void changePrintStreamToLoggerPanel() {
-
-    }
-
     private void initFrame() {
         this.frame = new JFrame();
         this.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
