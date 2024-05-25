@@ -86,12 +86,7 @@ public class KeyTyper extends ApplicationParent {
     public void typeKey() {
         countdown();
         for (Character character : result) {
-            try {
-                Thread.sleep(this.typeSpeed);
-            } catch (InterruptedException e) {
-                // TODO Auto-generated catch block
-                e.printStackTrace();
-            }
+            sleep();
 
             System.out.println(character);
 
@@ -123,6 +118,15 @@ public class KeyTyper extends ApplicationParent {
         }
     }
 
+    private void sleep() {
+        try {
+            Thread.sleep(this.typeSpeed);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
     private List<Character> convertStringtoCharArrayFormat(String result) {
         char[] resultsArray = result.toCharArray();
 
@@ -137,7 +141,6 @@ public class KeyTyper extends ApplicationParent {
                 characters.set(i, ' ');
             }
         }
-
         return characters;
     }
 
