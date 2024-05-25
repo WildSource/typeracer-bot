@@ -11,11 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BotConfigPanel extends JPanelParent {
-    JLabel typeSpeed;
-    JTextField typeSpeedTextField;
-    JButton confirmTypeSpeedButton;
-    JButton captureButton;
-    JButton startButton;
+    private JLabel typeSpeed;
+    private JTextField typeSpeedTextField;
+    private JButton confirmTypeSpeedButton;
+    private JButton captureButton;
+    private JButton startButton;
 
     public BotConfigPanel(Application application) {
         super(application);
