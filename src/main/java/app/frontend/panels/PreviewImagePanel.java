@@ -10,8 +10,8 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PreviewImagePanel extends JPanelParent {
-    JLabel previewLabel;
-    JLabel actualPreview;
+    private JLabel previewLabel;
+    private JLabel actualPreview;
 
     public PreviewImagePanel(Application application) {
         super(application);
