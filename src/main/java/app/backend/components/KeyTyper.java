@@ -91,22 +91,16 @@ public class KeyTyper extends ApplicationParent {
 
             if (character == '?') {
                 shiftModifierKey(KeyEvent.VK_SLASH);
-            } else if (character == '\n') {
-                robot.keyPress(KeyEvent.VK_ENTER);
-                robot.keyRelease(KeyEvent.VK_ENTER);
+            }
+
+            if (character == '\n') {
+                pressKey(KeyEvent.VK_ENTER);
+            }
+
+            if (Character.isUpperCase(character)) {
+                shiftModifierKey(charMap.get(character));
             } else {
-                if (Character.isUpperCase(character)) {
-                    robot.keyPress(KeyEvent.VK_SHIFT);
-
-                    robot.keyPress(charMap.get(character));
-                    robot.keyRelease(charMap.get(character));
-
-                    // Release the shift key
-                    robot.keyRelease(KeyEvent.VK_SHIFT);
-                } else {
-                    robot.keyPress(charMap.get(character));
-                    robot.keyRelease(charMap.get(character));
-                }
+                pressKey(charMap.get(character));
             }
             System.out.println("character " + character + " is written.");
         }
@@ -119,6 +113,11 @@ public class KeyTyper extends ApplicationParent {
         robot.keyRelease(keyEvent);
         // Release Shift
         robot.keyRelease(KeyEvent.VK_SHIFT);
+    }
+
+    private void pressKey(int keyEvent) {
+        robot.keyPress(keyEvent);
+        robot.keyRelease(keyEvent);
     }
 
     private void sleep() {
