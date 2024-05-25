@@ -10,12 +10,11 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 
 public class PreviewImagePanel extends JPanelParent {
-    Application application;
     JLabel previewLabel;
     JLabel actualPreview;
 
     public PreviewImagePanel(Application application) {
-        this.application = application;
+        super(application);
         getjPanel().setLayout(new MigLayout());
 
         this.previewLabel = new JLabel("Screenshot Preview");
@@ -32,10 +31,10 @@ public class PreviewImagePanel extends JPanelParent {
             ImageIcon image = new ImageIcon(screenshot);
             setIcon(image);
         });
-        this.application.getTyper().setResult(this.application.getOcr().readScreenShot(screenshot));
+        getApplication().getTyper().setResult(getApplication().getOcr().readScreenShot(screenshot));
         SwingUtilities.invokeLater(() -> {
-            this.application.getFrame().setSize(this.application.getFrame().getWidth() + screenshot.getWidth(), this.application.getFrame().getHeight() + screenshot.getHeight());
-            this.application.getFrame().setLocationRelativeTo(null);
+            getApplication().getFrame().setSize(getApplication().getFrame().getWidth() + screenshot.getWidth(), getApplication().getFrame().getHeight() + screenshot.getHeight());
+            getApplication().getFrame().setLocationRelativeTo(null);
         });
     }
 

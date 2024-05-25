@@ -11,7 +11,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class BotConfigPanel extends JPanelParent {
-    private Application application;
     JLabel typeSpeed;
     JTextField typeSpeedTextField;
     JButton confirmTypeSpeedButton;
@@ -19,7 +18,7 @@ public class BotConfigPanel extends JPanelParent {
     JButton startButton;
 
     public BotConfigPanel(Application application) {
-        this.application = application;
+        super(application);
         getjPanel().setLayout(new MigLayout());
         this.typeSpeed = new JLabel("type speed (ms)");
 
@@ -35,7 +34,7 @@ public class BotConfigPanel extends JPanelParent {
                     @Override
                     protected Object doInBackground() throws Exception {
                         int typespeed = Integer.parseInt(typeSpeedTextField.getText());
-                        application.getTyper().setTypeSpeed(typespeed);
+                        getApplication().getTyper().setTypeSpeed(typespeed);
                         System.out.println("TypeSpeed: " + typespeed);
                         return null;
                     }
@@ -49,7 +48,7 @@ public class BotConfigPanel extends JPanelParent {
             @Override
             public void actionPerformed(ActionEvent e) {
                 System.out.println("Starting mouselistener");
-                SwingUtilities.invokeLater(application::startMouseListener);
+                SwingUtilities.invokeLater(getApplication()::startMouseListener);
             }
         });
 
@@ -60,7 +59,7 @@ public class BotConfigPanel extends JPanelParent {
                 SwingWorker swingWorker = new SwingWorker() {
                     @Override
                     protected Object doInBackground() throws Exception {
-                        application.getTyper().typeKey();
+                        getApplication().getTyper().typeKey();
                         return null;
                     }
                 };

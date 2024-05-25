@@ -1,12 +1,16 @@
 package app.frontend;
 
+import app.Application;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class JPanelParent {
+    private Application application;
     private JPanel jPanel;
 
-    public JPanelParent() {
+    public JPanelParent(Application application) {
+        this.application = application;
         this.jPanel = new JPanel();
     }
 
@@ -18,5 +22,9 @@ public class JPanelParent {
 
     public JPanel getjPanel() {
         return jPanel;
+    }
+
+    public Application getApplication() {
+        return application;
     }
 }

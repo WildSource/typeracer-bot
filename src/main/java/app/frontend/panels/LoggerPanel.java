@@ -11,13 +11,12 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 public class LoggerPanel extends JPanelParent {
-    private Application application;
     private JLabel title;
     private JScrollPane scrollPane;
     private JTextArea logger;
 
     public LoggerPanel(Application application) {
-        this.application = application;
+        super(application);
         getjPanel().setLayout(new MigLayout());
 
         this.title = new JLabel("Logger");
@@ -32,7 +31,7 @@ public class LoggerPanel extends JPanelParent {
         getjPanel().add(this.scrollPane);
 
         this.getjPanel().setBorder(new LineBorder(Color.BLACK, 1));
-        this.application.getFrame().pack();
+        getApplication().getFrame().pack();
     }
 
     private class TextAreaOutputStream extends OutputStream {
