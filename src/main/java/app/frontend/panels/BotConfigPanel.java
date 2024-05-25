@@ -30,7 +30,16 @@ public class BotConfigPanel extends JPanelParent {
         this.confirmTypeSpeedButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                System.out.println("TypeSpeed: " + typeSpeedTextField.getText());
+                SwingWorker swingWorker = new SwingWorker() {
+                    @Override
+                    protected Object doInBackground() throws Exception {
+                        int typespeed = Integer.parseInt(typeSpeedTextField.getText());
+                        application.getTyper().setTypeSpeed(typespeed);
+                        System.out.println("TypeSpeed: " + typespeed);
+                        return null;
+                    }
+                };
+                swingWorker.run();
             }
         });
 

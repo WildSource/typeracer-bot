@@ -19,12 +19,14 @@ public class KeyTyper {
     private Map<Character, Integer> charMap;
     private Robot robot;
     private List<Character> result;
+    private int typeSpeed;
 
     public KeyTyper(Application application) {
         this.application = application;
         keyMapSetup();
         robotSetup();
         this.result = null;
+        this.typeSpeed = 10;
     }
 
     private void keyMapSetup() {
@@ -85,7 +87,7 @@ public class KeyTyper {
         countdown();
         for (Character character : result) {
             try {
-                Thread.sleep(10);
+                Thread.sleep(this.typeSpeed);
             } catch (InterruptedException e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -141,6 +143,14 @@ public class KeyTyper {
 
     public void setResult(String result) {
         this.result = convertStringtoCharArrayFormat(result);
+    }
+
+    public int getTypeSpeed() {
+        return typeSpeed;
+    }
+
+    public void setTypeSpeed(int typeSpeed) {
+        this.typeSpeed = typeSpeed;
     }
 }
 

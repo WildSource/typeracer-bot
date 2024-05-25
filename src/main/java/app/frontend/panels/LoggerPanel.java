@@ -52,10 +52,12 @@ public class LoggerPanel extends JPanelParent {
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
                     public void run() {
-                        textArea.append(text);
-                        scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
-                        // Scroll to the bottom
-                        textArea.setCaretPosition(textArea.getDocument().getLength());
+                        SwingUtilities.invokeLater(() -> {
+                            textArea.append(text);
+                            scrollPane.getVerticalScrollBar().setValue(scrollPane.getVerticalScrollBar().getMaximum());
+                            // Scroll to the bottom
+                            textArea.setCaretPosition(textArea.getDocument().getLength());
+                        });
                     }
                 });
                 sb.setLength(0);
