@@ -2,15 +2,11 @@ package app.backend;
 
 import app.Application;
 
-import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.List;
 
@@ -45,6 +41,10 @@ public class KeyTyper {
         charMap.put('.', KeyEvent.VK_PERIOD);
         charMap.put(',', KeyEvent.VK_COMMA);
         charMap.put(' ', KeyEvent.VK_SPACE);
+        charMap.put('\'', KeyEvent.VK_QUOTE);
+        charMap.put('"', KeyEvent.VK_QUOTEDBL);
+        charMap.put(';', KeyEvent.VK_SEMICOLON);
+        charMap.put('!', KeyEvent.VK_EXCLAMATION_MARK);
     }
 
     private void robotSetup() {
