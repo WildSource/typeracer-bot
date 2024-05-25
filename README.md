@@ -7,7 +7,7 @@ The folder must be at the same directory as the executabe.
 A little tip is to create a shortcut of the executable that you can place anywhere instead of moving the executable and its dependency.
 Other than that just double click on it.
 A window will popup.
-![image](https://github.com/WildSource/typeracer-bot/assets/62212250/4947e0d2-ca27-4e02-a084-d6a5735b2266) \n
+![image](https://github.com/WildSource/typeracer-bot/assets/62212250/4947e0d2-ca27-4e02-a084-d6a5735b2266) <br>
 1 - choose the type speed in milliseconds
 2 - confirm the type speed
 3 - start the mouse listener by clicking on the capture button
