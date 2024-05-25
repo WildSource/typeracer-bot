@@ -1,6 +1,7 @@
-package app.backend;
+package app.backend.components;
 
 import app.Application;
+import app.backend.ApplicationParent;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -10,15 +11,14 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
 
-public class KeyTyper {
-    private Application application;
+public class KeyTyper extends ApplicationParent {
     private Map<Character, Integer> charMap;
     private Robot robot;
     private List<Character> result;
     private int typeSpeed;
 
     public KeyTyper(Application application) {
-        this.application = application;
+        super(application);
         keyMapSetup();
         robotSetup();
         this.result = null;

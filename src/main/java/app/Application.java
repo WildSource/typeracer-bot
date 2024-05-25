@@ -1,8 +1,8 @@
 package app;
 
-import app.backend.KeyTyper;
-import app.backend.MouseListener;
-import app.backend.OpticalCharacterReader;
+import app.backend.components.KeyTyper;
+import app.backend.components.MouseListener;
+import app.backend.components.OpticalCharacterReader;
 import app.frontend.panels.BotConfigPanel;
 import app.frontend.panels.LoggerPanel;
 import app.frontend.panels.PreviewImagePanel;

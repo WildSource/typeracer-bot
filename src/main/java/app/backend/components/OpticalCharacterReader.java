@@ -1,6 +1,7 @@
-package app.backend;
+package app.backend.components;
 
 import app.Application;
+import app.backend.ApplicationParent;
 import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.TesseractException;
 
@@ -8,12 +9,11 @@ import javax.swing.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class OpticalCharacterReader {
-    private Application application;
+public class OpticalCharacterReader extends ApplicationParent {
     private Tesseract tesseract;
 
     public OpticalCharacterReader(Application application) {
-        this.application = application;
+        super(application);
         this.tesseract = new Tesseract();
         this.tesseract.setDatapath("tessdata");
         this.tesseract.setLanguage("eng");
